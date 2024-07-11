@@ -3,6 +3,7 @@
 #include "Stdio.h"
 #include "Stdarg.h"
 #include "Stddef.h"
+#include "String.h"
 extern char* em180mem;
 
 char context[16][3*16];
@@ -89,7 +90,11 @@ extern ER syscallhandler(SVCID syscallid,VP prm_0,VP prm_1,VP prm_2,VP prm_3,VP 
 extern int main(){
 	while(1){
 		for(pidnow=0;pidnow<16;pidnow++){
-			if (context[pidnow][3*13]!=0x00){em180();}
+			if (context[pidnow][3*13]!=0x00){
+				memcpy(&em180mem,context[pidnow],sizeof(context[pidnow]));
+				em180();
+				memcpy(context[pidnow],&em180mem,sizeof(context[pidnow]));
+			}
 		}
 	}
 	//memcpy(0xD40000,0xD40001,65536);
