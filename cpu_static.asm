@@ -1146,7 +1146,7 @@ em180_ret_adl__:
 	inc sp
 	jr em180_ret_adl_
 em180_ret__:
-	ld hl,(em180_stack4z80inst+(3*12))
+	ld hl,(em180_stack4z80inst+(3*10))
 	ld.sis a,(hl)
 	and a,1
 	ld b,a
